@@ -1,7 +1,7 @@
 # ndx-maze Extension for NWB:N
 This is a Neurodata Extension (NDX) for Neurodata Without Borders: Neurophysiology (NWB:N) 2.0 for representing the spatial structure of the environment (mazes, boxes, etc.).
 
-Developed in the Frank Lab.
+Developed in the Frank Lab with minor alterations.
 
 ## python
 ### Installation
