@@ -6,6 +6,6 @@ namespaces:
   schema:
   - namespace: core
     neurodata_types:
-    - ElectricalSeries
+    - NWBDataInterface
   - source: ndx-maze.extensions.yaml
   version: 0.1.0

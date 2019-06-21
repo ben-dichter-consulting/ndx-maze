@@ -1,19 +1,8 @@
-# ndx-maze Extension for NWB:N
-This is a Neurodata Extension (NDX) for Neurodata Without Borders: Neurophysiology (NWB:N) 2.0 for representing the spatial structure of the environment (mazes, boxes, etc.).
-
-## python
-### Installation
-```bash
-pip install ndx-maze
-```
-
-### Usage
-
-```python
 from ndx_maze import Environment, PointNode, SegmentNode, PolygonNode, Edge
 
 from pynwb import NWBHDF5IO, NWBFile
 from datetime import datetime
+from numpy.testing import assert_array_equal
 
 sleep_box_polygon_coords = [[1.1, 0.7], [1.1, 1.4], [1.95, 1.4], [1.95, 0.7]]
 
@@ -66,13 +55,10 @@ behavior_module.add(sleep_box)
 
 with NWBHDF5IO('test_maze.nwb', 'w') as io:
     io.write(nwb)
-```
 
-## MATLAB:
-### Installation
-```bash
-git clone https://github.com/bendichter/ndx-maze.git
-```
-```matlab
-generateExtension('path/to/ndx-maze/spec');
-```
+with NWBHDF5IO('test_maze.nwb', 'r') as io:
+    nwb2 = io.read()
+    assert_array_equal(nwb2.processing['behavior'].
+                       data_interfaces['w_maze'].
+                       nodes['left_arm'].coords[:],
+                       w_maze.nodes['left_arm'].coords[:])
