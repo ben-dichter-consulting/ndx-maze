@@ -1,4 +1,4 @@
-from ndx_maze import Environment, PointNode, SegmentNode, PolygonNode, Edge
+from ndx_maze import Environment, PointNode, SegmentNode, PolygonNode, Edge, Environments
 
 from pynwb import NWBHDF5IO, NWBFile
 from datetime import datetime
@@ -46,19 +46,19 @@ sleep_box = Environment(
     ]
 )
 
+environments = Environments(name='environments', environments=[w_maze, sleep_box])
+
 session_start_time = datetime.now().astimezone()
 nwb = NWBFile('session_description', 'identifier', session_start_time)
 
-behavior_module = nwb.create_processing_module('behavior', 'behavior module')
-behavior_module.add(w_maze)
-behavior_module.add(sleep_box)
+nwb.add_lab_meta_data(environments)
 
 with NWBHDF5IO('test_maze.nwb', 'w') as io:
     io.write(nwb)
 
+
 with NWBHDF5IO('test_maze.nwb', 'r') as io:
     nwb2 = io.read()
-    assert_array_equal(nwb2.processing['behavior'].
-                       data_interfaces['w_maze'].
+    assert_array_equal(nwb2.lab_meta_data['environments']['w_maze'].
                        nodes['left_arm'].coords[:],
                        w_maze.nodes['left_arm'].coords[:])
