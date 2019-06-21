@@ -4,7 +4,7 @@ This is a Neurodata Extension (NDX) for Neurodata Without Borders: Neurophysiolo
 ## python
 ### Installation
 ```bash
-pip install ndx-maze
+pip install git+https://github.com/bendichter/ndx-maze.git
 ```
 
 ### Usage
