@@ -11,6 +11,7 @@ pip install ndx-maze
 
 ```python
 from ndx_maze import Environment, PointNode, SegmentNode, PolygonNode, Edge
+from ndx_maze.vis import show_environment
 
 from pynwb import NWBHDF5IO, NWBFile
 from datetime import datetime
@@ -57,6 +58,9 @@ sleep_box = Environment(
     ]
 )
 
+show_environment(w_maze)
+show_environment(sleep_box)
+
 session_start_time = datetime.now().astimezone()
 nwb = NWBFile('session_description', 'identifier', session_start_time)
 
@@ -67,6 +71,11 @@ behavior_module.add(sleep_box)
 with NWBHDF5IO('test_maze.nwb', 'w') as io:
     io.write(nwb)
 ```
+
+[image of w_maze](images/w_maze.png)
+
+[image of sleep box](images/sleep_box.png)
+
 
 ## MATLAB:
 ### Installation
