@@ -12,10 +12,10 @@ pip install git+https://github.com/bendichter/ndx-maze.git
 ### Usage
 
 ```python
-from ndx_maze import Environment, PointNode, SegmentNode, PolygonNode, Edge
+from ndx_maze import Environments, Environment, PointNode, SegmentNode, PolygonNode, Edge
 from ndx_maze.vis import show_environment
 
-from pynwb import NWBHDF5IO, NWBFile
+from pynwb import NWBFile
 from datetime import datetime
 
 sleep_box_polygon_coords = [[1.1, 0.7], [1.1, 1.4], [1.95, 1.4], [1.95, 0.7]]
@@ -63,15 +63,12 @@ sleep_box = Environment(
 show_environment(w_maze)
 show_environment(sleep_box)
 
+environments = Environments(name='environments', environments=[w_maze, sleep_box])
+
 session_start_time = datetime.now().astimezone()
 nwb = NWBFile('session_description', 'identifier', session_start_time)
 
-behavior_module = nwb.create_processing_module('behavior', 'behavior module')
-behavior_module.add(w_maze)
-behavior_module.add(sleep_box)
-
-with NWBHDF5IO('test_maze.nwb', 'w') as io:
-    io.write(nwb)
+nwb.add_lab_meta_data(environments)
 ```
 
 ![image of w_maze](images/w_maze.png)

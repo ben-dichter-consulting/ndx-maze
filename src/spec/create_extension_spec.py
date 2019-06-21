@@ -101,14 +101,28 @@ def main():
                                                 doc='edges in the graph',
                                                 quantity='*')
                                ],
-                               attributes=[NWBAttributeSpec(name='name', doc='the name of this apparatus', dtype='text'),
-                                           NWBAttributeSpec(name='help', doc='help doc', dtype='text',
-                                                            value='Behavioral Apparatus')])
+                               attributes=[
+                                   NWBAttributeSpec(name='help', doc='help doc', dtype='text', value='Environment')])
 
-    new_data_types = [node, edge, point_node, segment_node, polygon_node, environment]
+    environments = NWBGroupSpec(neurodata_type_def='Environments',
+                                neurodata_type_inc='LabMetaData',
+                                default_name='environments',
+                                doc='holds environments',
+                                quantity='?',
+                                groups=[
+                                    NWBGroupSpec(neurodata_type_inc='Environment',
+                                                 doc='holds structure of environment',
+                                                 quantity='*')
+                                ],
+                                attributes=[
+                                    NWBAttributeSpec(name='help', doc='help doc', dtype='text', value='help')
+                                ])
+
+    new_data_types = [node, edge, point_node, segment_node, polygon_node, environment, environments]
 
     # TODO: include the types that are used and their namespaces (where to find them)
     ns_builder.include_type('NWBDataInterface', namespace='core')
+    ns_builder.include_type('LabMetaData', namespace='core')
 
     export_spec(ns_builder, new_data_types)
 

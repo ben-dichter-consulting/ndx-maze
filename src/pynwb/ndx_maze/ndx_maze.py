@@ -4,6 +4,7 @@ from os import path
 
 from pynwb.file import MultiContainerInterface
 from pynwb import register_class
+from pynwb.file import LabMetaData
 
 name = 'ndx-maze'
 
@@ -50,4 +51,27 @@ class Environment(MultiContainerInterface):
         }
     ]
     __help = 'info about an Environment'
+
+
+@register_class('Environments', name)
+class Environments(MultiContainerInterface, LabMetaData):
+        """
+        Purpose:
+            Topological graph representing connected components of a behavioral Environment.
+
+        Arguments:
+            name (str): name of this Environment
+            environments (list): list of Environment objects
+
+        """
+
+        __nwbfields__ = ('name', 'environments')
+
+        __clsconf__ = [{
+                'attr': 'environments',
+                'type': Environment,
+                'add': 'add_environment',
+                'get': 'get_environment'
+            }, ]
+        __help = 'info about an Environment'
 
