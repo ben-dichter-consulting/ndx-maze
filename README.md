@@ -74,9 +74,9 @@ with NWBHDF5IO('test_maze.nwb', 'w') as io:
     io.write(nwb)
 ```
 
-[image of w_maze](images/w_maze.png)
+![image of w_maze](images/w_maze.png)
 
-[image of sleep box](images/sleep_box.png)
+![image of sleep box](images/sleep_box.png)
 
 
 ## MATLAB:
