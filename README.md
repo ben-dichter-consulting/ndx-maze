@@ -6,7 +6,7 @@ Developed in the Frank Lab with minor alterations.
 ## python
 ### Installation
 ```bash
-pip install git+https://github.com/bendichter/ndx-maze.git
+pip install git+https://github.com/ben-dichter-consulting/ndx-maze.git
 ```
 
 ### Usage
